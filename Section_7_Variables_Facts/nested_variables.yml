@@ -1,0 +1,15 @@
+--- 
+- name: Example of variable in Playbook 
+  hosts: managed-node01
+
+  vars: 
+    appname: "MyApp"
+    version: "1.0"
+
+    networking:
+        protocol: "HTTP"
+        port: 8080 
+  tasks: 
+    - name: Print application Details 
+      ansible.builtin.debug: 
+        msg: "Application name is {{ appname }}, version is {{ version }},and port is {{ networking['port'] }}"

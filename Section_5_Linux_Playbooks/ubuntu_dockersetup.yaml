@@ -1,0 +1,38 @@
+---
+- name: This is a play for Docker Setup on Ubuntu
+  hosts: "managed-node01"
+  become: yes
+
+  tasks:
+  - name: Docker pre-reqs installation of ca-certificates pkg
+    ansible.builtin.apt:
+      name: ca-certificates
+      state: present
+      update_cache: true
+
+  - name: Docker pre-reqs installation of curl pkg
+    ansible.builtin.apt:
+      name: curl
+      state: present   
+      update_cache: true
+
+  - name: Adding DOCKER GPG key
+    ansible.builtin.apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Adding Docker Repository
+    ansible.builtin.apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu noble stable 
+      state: present
+
+  - name: Installing Docker Package
+    ansible.builtin.apt:
+      name: docker-ce
+      state: present
+      update_cache: true
+
+  - name: Start Docker Services
+    ansible.builtin.service:
+      name: docker
+      state: started

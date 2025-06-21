@@ -1,0 +1,12 @@
+---
+# Playbook for user creation
+- name: User creation testing
+  hosts: thinknyx_servers
+  become: yes
+
+# Task for user creation
+  tasks:
+  - name: Create a new user
+    ansible.builtin.user:
+      name: john_harvey
+      state: present

@@ -1,0 +1,11 @@
+---
+- name: This is my first play
+  hosts: "managed-node01"
+  become: yes
+
+  tasks:
+  - name: Creating an empty file
+    ansible.builtin.file:
+      path: "/tmp/playbooktest"
+      mode: '777'
+      state: touch

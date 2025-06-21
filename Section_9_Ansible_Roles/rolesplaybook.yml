@@ -1,0 +1,7 @@
+---
+- name: Running my demo role playbook
+  hosts: all 
+  become: true
+  remote_user: ubuntu 
+  roles: 
+    - serverroles 

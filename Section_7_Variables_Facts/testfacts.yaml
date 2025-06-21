@@ -1,0 +1,9 @@
+---
+- name: Testing Ansible facts
+  hosts: "managed-node01"
+  become: yes
+
+  tasks:
+  - name: Ansible facts print
+    ansible.builtin.debug:
+      msg: "Hostname: {{ ansible_hostname }}, IP Address: {{ ansible_default_ipv4.address }}, macaddress: {{ ansible_default_ipv4['macaddress'] }}" 

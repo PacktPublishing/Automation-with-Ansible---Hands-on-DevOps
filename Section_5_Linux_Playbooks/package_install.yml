@@ -1,0 +1,13 @@
+---
+# Playbook for package installation
+- name: Package Installation
+  hosts: thinknyx_servers
+  become: yes
+
+  # Tasks for installing apache2
+  tasks:
+  - name: Install a package (APT example)
+    ansible.builtin.apt:
+      name: apache2
+      state: present
+      update_cache: yes

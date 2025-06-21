@@ -1,0 +1,11 @@
+---
+- name: Play for Windows local user creation
+  hosts: windows
+
+  tasks:
+  - name: Creating a local user
+    ansible.windows.win_user:
+      name: yogeshdemo
+      password: 'password@357'
+      update_password: on_create
+      password_expired: true

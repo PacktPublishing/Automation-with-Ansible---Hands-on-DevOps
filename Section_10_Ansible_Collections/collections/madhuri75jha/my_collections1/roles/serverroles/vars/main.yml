@@ -1,0 +1,4 @@
+---
+# vars file for serverroles
+myusername: madhuri
+mode: "0775"

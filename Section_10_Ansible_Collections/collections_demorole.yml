@@ -1,0 +1,9 @@
+---
+- name: Example Playbook using a role from a collection
+  hosts: all
+  become: yes
+  collections:
+    - madhuri75jha.my_collections1
+
+  roles:
+    - role: madhuri75jha.my_collections1.serverroles

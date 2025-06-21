@@ -1,0 +1,46 @@
+---
+- name: This play is for Docker Setup on Ubuntu
+  hosts: managed-node02
+  become: yes
+
+  tasks:
+    - name: Install prerequisites for Docker
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - gnupg
+        - lsb-release
+
+    - name: Add Docker GPG apt key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker repository
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+        state: present
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Docker using docker.io package (alternative)
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+      when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_version']|int >= 22    
+
+    - name: Ensure Docker is running
+      ansible.builtin.systemd:
+        name: docker
+        enabled: yes
+        state: started
+

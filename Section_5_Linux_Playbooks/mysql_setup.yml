@@ -1,0 +1,26 @@
+---
+# Playbook to install MySQL, start the service & enable it on the boot
+- name: Install MySQL on managed-node02
+  hosts: managed-node02
+  become: yes
+
+# Tasks to install MySQL on managed nodes
+  tasks: 
+  - name: Update APT package index
+    ansible.builtin.apt:
+      update_cache: yes
+
+  - name: Install MySQL server
+    ansible.builtin.apt:
+      name: mysql-server
+      state: present
+
+  - name: Start MySQL service
+    ansible.builtin.systemd:
+      name: mysql
+      state: started
+
+  - name: Enable MySQL service on boot
+    ansible.builtin.systemd:
+      name: mysql
+      enabled: yes

@@ -1,0 +1,9 @@
+---
+- name: Playbook with Disabled Facts 
+  hosts: managed-node01 
+  gather_facts: no 
+  tasks: 
+    - name: File Creation 
+      ansible.builtin.file:
+        path: /var/tmp/nofacttest
+        state: touch 

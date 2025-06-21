@@ -1,0 +1,13 @@
+---
+- name: Running playbook via awx
+  hosts: "localhost"
+  connection: local
+
+  tasks:
+  - name: Ping Test
+    ansible.builtin.ping:
+    register: pingoutput
+
+  - name: Debug results
+    ansible.builtin.debug:
+      var: pingoutput

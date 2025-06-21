@@ -1,0 +1,29 @@
+---
+- name: Example Playbook with Handlers and Loop
+  hosts: managed-node01
+  become: yes
+  vars:
+    packages_to_install:
+      - name: apache2
+        state: present
+      - name: php8.3-fpm
+        state: present
+
+  tasks:
+    - name: Install packages
+      ansible.builtin.package:
+        name: "{{ item.name }}"
+        state: "{{ item.state }}"
+      loop: "{{ packages_to_install }}"
+      notify: Restart Services
+      when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_version']|int >= 22
+
+  handlers:
+    - name: Restart Services
+      ansible.builtin.systemd:
+        name: "{{ item.name }}"
+        state: restarted
+      loop: "{{ packages_to_install }}"
+
+
+

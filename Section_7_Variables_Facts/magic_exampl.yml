@@ -1,0 +1,15 @@
+--- 
+- name: Example Playbook using Ansible Magic Variables 
+  hosts: all 
+  tasks: 
+    - name: Print Ansible version 
+      debug:
+        msg: "Ansible version: {{ ansible_version }}"         
+
+    - name: Print Python interpreter path 
+      debug: 
+        msg: "Python interpreter path: {{ ansible_playbook_python }}"     
+
+    - name: Print playbook directory 
+      debug: 
+        msg: "Playbook directory: {{ playbook_dir }}" 

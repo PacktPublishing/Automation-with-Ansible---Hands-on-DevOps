@@ -1,0 +1,10 @@
+--- 
+- name: Install packages based on OS
+  hosts: all
+  become: yes 
+  tasks:
+    - name: Install Apache on Ubuntu 22.04 or higher 
+      ansible.builtin.package: 
+        name: apache2 
+        state: present 
+      when: ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_version']|int >= 22

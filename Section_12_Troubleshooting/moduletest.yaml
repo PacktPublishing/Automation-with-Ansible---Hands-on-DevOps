@@ -1,0 +1,18 @@
+---
+- name: Syntax Test Play
+  hosts: "managed-node01"
+  become: yes
+
+  tasks:
+  - name: Creating a user "demo"
+    ansible.builtin.user:
+      name: demo
+      uid: 6666
+      shell: /bin/bash
+      state: present
+
+  - name: Creating a group "demogroup"
+    ansible.builtin.group:
+      name: demogroup
+      gid: 7777
+      state: present

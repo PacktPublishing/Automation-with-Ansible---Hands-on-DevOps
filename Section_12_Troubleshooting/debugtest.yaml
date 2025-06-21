@@ -1,0 +1,21 @@
+---
+- name: MOTD file
+  hosts: "managed-node02"
+  become: true
+
+  tasks:
+    - name: Creating MOTD file
+      ansible.builtin.copy:
+        dest: /etc/motd
+        mode: '644'
+        content: |
+          Welcome to Thinknyx Technologies Server!
+
+          This server is managed by Ansible.
+
+          Last Login time {{ ansible_date_time['date'] }} {{ ansible_date_time['time'] }}
+      register: output
+
+    - name: For Debug Purpose
+      ansible.builtin.debug:
+        var: output

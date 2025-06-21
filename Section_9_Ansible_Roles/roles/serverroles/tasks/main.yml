@@ -1,0 +1,14 @@
+---
+# tasks file for serverroles
+- name: Creating user by {{ myusername }} by roles
+  ansible.builtin.user:
+    name: "{{ myusername }}"
+    state: present
+
+- name: Creating Directory /home/{{ myusername }}/data
+  ansible.builtin.file:
+    path: "/home/{{ myusername }}/data"
+    state: directory
+    owner: "{{ myusername }}"
+    group: "{{ myusername }}"
+    mode: "{{ mode }}"    

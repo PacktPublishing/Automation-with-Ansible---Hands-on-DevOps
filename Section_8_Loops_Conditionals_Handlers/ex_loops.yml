@@ -1,0 +1,17 @@
+--- 
+- name: Add multiple users 
+  hosts: managed-node02 
+  become: yes 
+  vars: 
+    usernames: 
+      - bob 
+      - john 
+      - alice 
+      - jane 
+
+  tasks: 
+    - name: Add users 
+      ansible.builtin.user: 
+        name: "{{ item }}" 
+        state: present 
+      loop: "{{ usernames }}"

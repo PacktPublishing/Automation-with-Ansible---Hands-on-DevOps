@@ -1,0 +1,20 @@
+---
+# Playbook for user creation
+- name: User creation testing
+  hosts: managed-node01
+  vars:
+    user1: Sam
+    user2: Maria
+  become: yes
+
+# Task for user creation
+  tasks:
+  - name: User creation for {{ user1 }}
+    ansible.builtin.user:
+      name: "{{ user1 }}"
+      state: present
+
+  - name: User creation for {{ user2 }}
+    ansible.builtin.user:
+      name: "{{ user2 }}"
+      state: present
